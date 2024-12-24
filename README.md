@@ -1,5 +1,7 @@
 # Traffic-Accident-Prediction
 
+Source of data: https://www.kaggle.com/datasets/denkuznetz/traffic-accident-prediction
+
 Goal of the project: to have a program which can determine the likely hood of an accident
 
 Dataset information:
