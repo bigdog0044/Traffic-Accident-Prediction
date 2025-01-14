@@ -2,19 +2,29 @@
 
 <html>
     <head>
-        <body>
-            <title>Traffic accident prediction</title>
-        </body>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>Traffic accident prediction</title>
     </head>
     <style>
-        #form{
+        #title{
+            text-align: center;
+            
+        }
+        #user-form{
             width: 400px;
             height: 400px;
-            background-color: aqua;
-            position: relative;
+            margin: auto;
+        }
+
+        #user-form>input{
+            display: flex;
         }
     </style>
-    <div id="form"></div>
+    <h1 id="title">Insurace predictor</h1>
+    <form id="user-form" action="" method="post">
+        <p id="driver-age-txt">How old is the driver?</p>
+        <input type="number" placeholder="Enter a number">
+    </form>
     <body>
         
     </body>
