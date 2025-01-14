@@ -1,0 +1,16 @@
+#title{
+    text-align: center;
+    
+}
+#user-form{
+    width: 400px;
+    height: 400px;
+    margin: auto;
+}
+
+#user-form>input{
+    width:100%;
+}
+#user-form>label{
+    text-align: center;
+}
