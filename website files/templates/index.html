@@ -15,12 +15,19 @@
         <h1 id="title">Insurace predictor</h1>
         <form id="user-form" action="" method="post">
             <label for="">How old is the driver?</label>
-            <input type="number" name="driverAge" placeholder="Enter a number greater than 0">
+            <br>
+            <input type="number" name="driverAge" placeholder="Enter a number greater than 0" required>
+            <br>
             <label for="">How many veichles were involved in the accident?</label>
-            <input type="number" name="numVechicle" placeholder="Enter a number between 1-5">
+            <br>
+            <input type="number" name="numVechicle" placeholder="Enter a number between 1-5" required>
+            <br>
             <label for="">How long has the driver been driving for?</label>
-            <input type="number" name="experience" placeholder="Enter a number greater than 0">
-            <label for="alcohol-yes-or-no">Did the driver consume alcohol?</label> <br>
+            <br>
+            <input type="number" name="experience" placeholder="Enter a number greater than 0" required>
+            <br>
+            <label for="alcohol-yes-or-no">Did the driver consume alcohol?</label> 
+            <br>
             <select name="alcohol-yes-or-no" id="alcohol-yes-or-no">
                 <option value="1">Yes</option>
                 <option value="0">No</option>
