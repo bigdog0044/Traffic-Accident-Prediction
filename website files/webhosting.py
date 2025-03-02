@@ -2,6 +2,7 @@ from flask import Flask
 from flask import render_template
 from flask import request
 import pickle
+import numpy as np
 
 
 app = Flask(__name__)
@@ -9,9 +10,11 @@ app = Flask(__name__)
 @app.route('/',methods=["GET","POST"])
 def main(name =None):
 
-    formData = gettingFormInfo()
+    formData = np.array(gettingFormInfo())
+
+    formData = formData.reshape(1,-1)
     print(formData)
-    #AI(formData)
+    AI(formData)
     return render_template('index.html',person=name)
 
 
@@ -36,12 +39,21 @@ def gettingFormInfo():
             roadCondition = int(request.form.get("road_condition"))
             vehicleType = int(request.form.get("vehicle_type"))
             roadLightCondition = int(request.form.get("road_light_condition"))
+            accidentSeverity = int(request.form.get("accident_severity"))
+            speedLimit = int(request.form.get("speed_limit"))
 
-            return [driverAge,numVechicles,driverExperience,consumedAlcohol,trafficDensity,weather,roadType,timeOfDay,roadCondition,vehicleType,roadLightCondition]
+
+            return [weather,roadType,timeOfDay,speedLimit,numVechicles,consumedAlcohol,accidentSeverity,roadCondition,vehicleType,driverAge,driverExperience,roadLightCondition]
+            #return [driverAge,numVechicles,driverExperience,consumedAlcohol,trafficDensity,weather,roadType,timeOfDay,roadCondition,vehicleType,roadLightCondition,accidentSeverity,speedLimit]
 
 
 def AI(data):
      model = pickle.load(open("model.pkl","rb"))
-     print(model.predict(data))
+     #checks to make sure that blank data is not being predicted by the AI
+     """if len(data[0]) != 1:
+        print(model.predict(data.reshape(1,-1)))"""
+
+
+#main method
 if __name__ == "__main__":
     app.run()
