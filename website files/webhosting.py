@@ -42,16 +42,16 @@ def gettingFormInfo():
             accidentSeverity = int(request.form.get("accident_severity"))
             speedLimit = int(request.form.get("speed_limit"))
 
-
-            return [weather,roadType,timeOfDay,speedLimit,numVechicles,consumedAlcohol,accidentSeverity,roadCondition,vehicleType,driverAge,driverExperience,roadLightCondition]
+            print(speedLimit)
+            return [weather,roadType,timeOfDay,trafficDensity,speedLimit,numVechicles,consumedAlcohol,accidentSeverity,roadCondition,vehicleType,driverAge,driverExperience,roadLightCondition]
             #return [driverAge,numVechicles,driverExperience,consumedAlcohol,trafficDensity,weather,roadType,timeOfDay,roadCondition,vehicleType,roadLightCondition,accidentSeverity,speedLimit]
 
 
 def AI(data):
      model = pickle.load(open("model.pkl","rb"))
      #checks to make sure that blank data is not being predicted by the AI
-     """if len(data[0]) != 1:
-        print(model.predict(data.reshape(1,-1)))"""
+     if len(data[0]) != 1:
+        print(model.predict(data.reshape(1,-1)))
 
 
 #main method
