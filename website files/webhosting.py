@@ -10,12 +10,15 @@ app = Flask(__name__)
 @app.route('/',methods=["GET","POST"])
 def main(name =None):
 
-    formData = np.array(gettingFormInfo())
+    if gettingFormInfo() != None:
 
-    formData = formData.reshape(1,-1)
-    print(formData)
-    AI(formData)
-    return render_template('index.html',person=name)
+        formData = np.array(gettingFormInfo())
+        #formData = formData.astype(int)
+
+        formData = formData.reshape(1,-1)
+        print(formData)
+        AI(formData)
+    return render_template('index.html',person=name) #renders the html
 
 
 @app.route('/', methods=["POST"])
@@ -40,7 +43,7 @@ def gettingFormInfo():
             vehicleType = int(request.form.get("vehicle_type"))
             roadLightCondition = int(request.form.get("road_light_condition"))
             accidentSeverity = int(request.form.get("accident_severity"))
-            speedLimit = int(request.form.get("speed_limit"))
+            speedLimit = request.form.get("speed_limit")
 
             print(speedLimit)
             return [weather,roadType,timeOfDay,trafficDensity,speedLimit,numVechicles,consumedAlcohol,accidentSeverity,roadCondition,vehicleType,driverAge,driverExperience,roadLightCondition]
