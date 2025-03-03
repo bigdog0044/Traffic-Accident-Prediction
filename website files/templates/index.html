@@ -101,5 +101,22 @@
             <br>
             <button type="submit">Send data</button>
         </form>
+
+        <script>
+            let condition = {{ condition|tojson }};
+            let message = {{ message|tojson }};
+
+            // Function to add a new element
+            function addElement(content) {
+                const newElement = document.createElement('p');
+                newElement.textContent = content;
+                document.getElementById('elements-container').appendChild(newElement);
+            }
+
+            // Check the condition and add the element if true
+            if (condition) {
+                addElement(message);
+            }
+        </script>
     </body>
 </html>

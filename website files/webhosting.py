@@ -13,7 +13,7 @@ def main(name =None):
     if gettingFormInfo() != None:
 
         formData = np.array(gettingFormInfo())
-        #formData = formData.astype(int)
+        formData = formData.astype(int) #converts the array to a int
 
         formData = formData.reshape(1,-1)
         print(formData)
