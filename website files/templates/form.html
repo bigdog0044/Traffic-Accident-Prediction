@@ -89,5 +89,8 @@
     </select>
     <br>
     <button type="submit">Send data</button>
+    {%block errorContainer%}
+    <p id="errorMSG">{{errorMSG}}</p>
+    {% endblock %}
 </form>
 {%endblock%}

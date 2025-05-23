@@ -5,6 +5,9 @@ from flask import current_app
 #from validateData import validData
 app = Flask(__name__)
 
+def AIProcessing(ageInput,numVecInput,experienceInput,speedInput):
+    return 0
+
 #@app.route("/sendInfo", methods=["POST", "GET"])
 def validData(ageInput,numVecInput,experienceInput,speedInput):
     if ageInput == "" or numVecInput == "" or experienceInput == "" or speedInput == "":
@@ -28,12 +31,11 @@ def mainPage(name=None):
             request.form.get('numVechicle'),
                 request.form.get('experience'), 
                     request.form.get('speed_limit'))
-        print(error)
         if error == None:
             #add stuff here that gets returned by the AI algorithm
             return render_template("form.html")
         else:
-            return render_template("errorForm.html", errorMSG=error)
+            return render_template("form.html", errorMSG=error)
         
 
 #used to serve css files
