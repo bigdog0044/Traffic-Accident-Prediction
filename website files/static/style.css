@@ -14,3 +14,7 @@
 #user-form>label{
     text-align: center;
 }
+#error{
+    color:red;
+    
+}

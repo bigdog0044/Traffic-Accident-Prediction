@@ -1,62 +1,47 @@
 from flask import Flask
-from flask import render_template
 from flask import request
-import pickle
-import numpy as np
-
-
+from flask import render_template
+from flask import current_app
+#from validateData import validData
 app = Flask(__name__)
 
-@app.route('/',methods=["GET","POST"])
-def main(name =None):
+#@app.route("/sendInfo", methods=["POST", "GET"])
+def validData(ageInput,numVecInput,experienceInput,speedInput):
+    if ageInput == "" or numVecInput == "" or experienceInput == "" or speedInput == "":
+        return "Error: form inputs are blank. Please enter data"
+    try:
+        
+        if int(ageInput) < 0 or int(numVecInput) < 0 or int(experienceInput) < 0 or int(speedInput) < 0:
+            return "Error: inputs can't be negative"
+    except ValueError:
+        return "Error: incorrect format detected. Enter only numbers as the input values"
+    return None
 
-    if gettingFormInfo() != None:
+@app.route("/", methods=["POST", "GET"])
+def mainPage(name=None):
+    if request.method == "GET":
+        print("using GET method")
+        return render_template('form.html')
+    else:
+        print("not using get method")
+        error = validData(request.form.get('driverAge'),
+            request.form.get('numVechicle'),
+                request.form.get('experience'), 
+                    request.form.get('speed_limit'))
+        print(error)
+        if error == None:
+            #add stuff here that gets returned by the AI algorithm
+            return render_template("form.html")
+        else:
+            return render_template("errorForm.html", errorMSG=error)
+        
 
-        formData = np.array(gettingFormInfo())
-        formData = formData.astype(int) #converts the array to a int
+#used to serve css files
+@app.route('/styles')
+def css():
+    return current_app.send_static_file("style.css")
 
-        formData = formData.reshape(1,-1)
-        print(formData)
-        AI(formData)
-    return render_template('index.html',person=name) #renders the html
-
-
-@app.route('/', methods=["POST"])
-def gettingFormInfo():
-        if request.method == "POST":
-            driverAge = request.form.get("driverAge")
-            numVechicles = request.form.get("numVechicle")
-            driverExperience = request.form.get("experience")
-
-            #validating userinput, this will be changed later on in the future
-            if driverAge == "" or int(driverAge) < 0 or numVechicles == "" or int(numVechicles) < 0 or driverExperience == "" or int(driverExperience):
-                driverAge = 0
-                numVechicles = 0
-                driverExperience = 0
-            
-            consumedAlcohol = int(request.form.get("alcohol-yes-or-no"))
-            trafficDensity = int(request.form.get("traffic-density"))
-            weather = int(request.form.get("weather"))
-            roadType = int(request.form.get("road_type"))
-            timeOfDay = int(request.form.get("time_of_day"))
-            roadCondition = int(request.form.get("road_condition"))
-            vehicleType = int(request.form.get("vehicle_type"))
-            roadLightCondition = int(request.form.get("road_light_condition"))
-            accidentSeverity = int(request.form.get("accident_severity"))
-            speedLimit = request.form.get("speed_limit")
-
-            print(speedLimit)
-            return [weather,roadType,timeOfDay,trafficDensity,speedLimit,numVechicles,consumedAlcohol,accidentSeverity,roadCondition,vehicleType,driverAge,driverExperience,roadLightCondition]
-            #return [driverAge,numVechicles,driverExperience,consumedAlcohol,trafficDensity,weather,roadType,timeOfDay,roadCondition,vehicleType,roadLightCondition,accidentSeverity,speedLimit]
-
-
-def AI(data):
-     model = pickle.load(open("model.pkl","rb"))
-     #checks to make sure that blank data is not being predicted by the AI
-     if len(data[0]) != 1:
-        print(model.predict(data.reshape(1,-1)))
-
-
-#main method
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
+    
+#used to help validate errors within the data

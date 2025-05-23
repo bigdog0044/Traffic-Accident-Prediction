@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>{%block title%}{%endblock%}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    </head>
+    <body>
+        <h1 id="title">Insurace predictor</h1>
+        {%block content%}
+        {% endblock %}
+        {%block errorContainer%}
+        {% endblock %}
+        {%block result%}
+        {% endblock %}
+    </body>
+</html>

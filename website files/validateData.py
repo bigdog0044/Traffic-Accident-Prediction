@@ -1,0 +1,2 @@
+def validData():
+    return True
