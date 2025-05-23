@@ -9,17 +9,21 @@ app = Flask(__name__)
 
 def AIProcessing( age, totalVehicle, experience, alcoholConsumption, trafficDensity, weather, roadType,
             timeOfDay, roadCondition, vehicleType, roadLightCondition, speedLimit, accidentSeverity):
-    model = pickle.load(open("model.pkl", "rb"))
+    model = pickle.load(open("savedModel.pkl", "rb"))
     data = np.array([weather, roadType, timeOfDay,trafficDensity,
                 speedLimit, totalVehicle, alcoholConsumption, accidentSeverity,
                 roadCondition, vehicleType, age, experience,
                 roadLightCondition])
-    print(data)
-    result = model.predict(data.reshape(-1,1))
+    data = data.reshape(1,-1)
+    result = model.predict(data)
     print(result)
-    return 0
+    if result[0] == 1:
+        
+        return "Accident has likely to have occured"
+    else:
+        return "Accident likely to have not occured"
 
-#@app.route("/sendInfo", methods=["POST", "GET"])
+
 def validData(ageInput,numVecInput,experienceInput,speedInput):
     if ageInput == "" or numVecInput == "" or experienceInput == "" or speedInput == "":
         return "Error: form inputs are blank. Please enter data"
@@ -59,11 +63,11 @@ def mainPage(name=None):
             accidentSeverity = int(request.form.get('accident_severity'))
             
             
-            AIProcessing(age, totalVehicle, experience, alcoholConsumption, trafficDensity, weather,
+            result = AIProcessing(age, totalVehicle, experience, alcoholConsumption, trafficDensity, weather,
                          roadType, timeOfDay, roadCondition, vehicleType, roadLightCondition,
                          speedLimit, accidentSeverity)
             #add stuff here that gets returned by the AI algorithm
-            return render_template("form.html", result = 1)
+            return render_template("form.html", resultOutput = result)
         else:
             return render_template("form.html", errorMSG=error)
         
