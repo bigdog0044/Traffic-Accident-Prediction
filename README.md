@@ -1,14 +1,8 @@
-Things to fix/add:
-- retrain AI model as the training data includes data which shoouldn't be in there
-- add a way to return the output of the AI prediction to the user along with if the driver is a high risk to insure
-- tidy up the html form so its easier to navigate
-- tidy up and add more comments to the code so it can be easily read
-
 # Traffic-Accident-Prediction
 
 Source of data: https://www.kaggle.com/datasets/denkuznetz/traffic-accident-prediction
 
-Goal of the project: to have a program which can determine the likely hood of an accident which can be used to determin if the insurance company should insure the driver
+Goal of the project: To have a website in which a customer service rep at a insurance company can enter accident information from a customer to determin if this accident was a legitimate accident and not a accident in which the customer was trying to attempt fraud
 
 Dataset information:
 Traffic Accident Prediction Dataset
