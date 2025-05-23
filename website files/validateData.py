@@ -1,2 +1,0 @@
-def validData():
-    return True
